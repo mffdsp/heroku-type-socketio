@@ -13,34 +13,67 @@
         <div style="height: fit-content; width: fit-content; margin: auto; background-color: wheat; ">
             <h1 style="font-size: 18;">Player 1</h1>
         </div>
-        <input class="mainInput" onkeyup="attInput()" type="text" style="font-size: medium; margin-top: 0; background-color: wheat; height: 200; width: 100%; padding: 20; border-top-right-radius: 12px; border-top-left-radius: 12px;"></input>
-        <button onclick="newLog()" style="background-color: whitesmoke; width: 100%; margin-top: 0; border-bottom-left-radius: 12px;  border-bottom-right-radius: 12px;  border: blue;"> SEND</button>
+        <input disabled class="mainInput1" onkeyup="attInput()" type="text" style="font-size: medium; margin-top: 0; background-color: wheat; height: 200; width: 100%; padding: 20; border-top-right-radius: 12px; border-top-left-radius: 12px;"></input>
+        <button onclick="newLog1()" style="background-color: whitesmoke; width: 100%; margin-top: 0; border-bottom-left-radius: 12px;  border-bottom-right-radius: 12px;  border: blue;"> SEND</button>
+    </div>
+    
+    <div style="padding: 10; height: 100%; width: 500; display: inline; margin-top: 100;">
+
+        <div style="height: fit-content; width: fit-content; margin: auto; background-color: wheat; ">
+            <h1 style="font-size: 18;">Player 2</h1>
+        </div>
+        <input disabled class="mainInput2" onkeyup="attInput()" type="text" style="font-size: medium; margin-top: 0; background-color: wheat; height: 200; width: 100%; padding: 20; border-top-right-radius: 12px; border-top-left-radius: 12px;"></input>
+        <button onclick="newLog2()" style="background-color: rgb(116, 110, 110); width: 100%; margin-top: 0; border-bottom-left-radius: 12px;  border-bottom-right-radius: 12px;  border: blue;"> SEND</button>
     </div>
 
     <script type="text/javascript"> 
 
         var socket = io();
+        var player = 1;
 
+        socket.on('getData', function(data){
+            
+            //if(data.length == 2){
+           //     player = 2;
+            //}
+           // console.log(data.length + 'player: ' + player);
+        });
         socket.on('newLoginAll', function(socket){
             $('.body').append('<h1>'+ socket.obj + '</h1>')
         });
    
-        function newLog(){
+        function newLog1(){
             console.log("NOVO LOGIN");
             $('.body').append('<h1>'+ socket.id + '</h1>')
-            socket.emit('newLogin', {autor: 'joao'});
-        };
-
-    
-        function attInput(msg){
-            socket.emit('newText', $('.mainInput').val());
+            socket.emit('newLogin', {id : socket.id});
+            player = 1;
+            console.log("DESA")
+            $('.mainInput1').removeAttr('disabled');
+            $('.mainInput2').attr('disabled', 'disabled');
 
         }
 
-        socket.on('newTextRes', function(data){
-            $('.mainInput').val(data);
-        });
+        function newLog2(){
+            console.log("NOVO LOGIN");
+            $('.body').append('<h1>'+ socket.id + '</h1>')
+            socket.emit('newLogin', {id : socket.id});
+            player = 2;
+            $('.mainInput2').removeAttr('disabled');
+            $('.mainInput1').attr('disabled', 'disabled');
+        }
 
+        function attInput(msg){
+            console.log(player);
+            socket.emit('newText', { p1 : $('.mainInput1').val(), p2: $('.mainInput2').val()});
+          
+        }
+
+        socket.on('newTextRes', function(data){
+            if(player == 1){
+                $('.mainInput2').val(data.p2);
+            }else  $('.mainInput1').val(data.p1);
+            
+        });
 
     </script>
 </body>

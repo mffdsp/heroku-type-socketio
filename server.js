@@ -15,9 +15,15 @@ app.use('/', (req, res) => {
 })
 
 let users = []
+
 io.on('connection', socket => {
+    
     console.log(socket.id)
+
+    socket.emit('getData', users);
+
     socket.on('newLogin', data => {
+        users.push(data);
         console.log(data.autor);
         socket.broadcast.emit('newLoginAll', { obj : socket.id});
     });
