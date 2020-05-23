@@ -6,36 +6,39 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js"></script>
     <title>Document</title>
 </head>
-<body style="overflow-y: auto; display: flexbox ;align-items: center; justify-content: center;"  class="body" >
-    <h1 oncopy="return false" oncut="return false" onpaste="return false" class="mainWord" style="text-align: center; font-size: 16; margin: auto; display: flex; margin-top: 10; width: fit-content;" >nullWord</h1>
+<body style="overflow-y: auto; display: flexbox  ;align-items: center; justify-content: center;"  class="body" >
+    <div style="background-color: whitesmoke; margin:auto; width: fit-content; display:grid ;align-items: center; justify-content: center;">
+        <h1 oncopy="return false" oncut="return false" onpaste="return false" class="mainWord" style="text-align: center; font-size: 16; margin: auto; display: flex; margin-top: 10; width: fit-content;" >nullWord</h1>
 
-    <div style="display:flex ;align-items: center; justify-content: center;">
-        <div style="padding: 10; height: 100%; width: 500; display: inline; margin-top: 10;">
-
-            <div style="height: fit-content; width: fit-content; margin: auto; ">
-                <h1 style="font-size: 18;">Player 1</h1>
+        <div style="display:flex ;align-items: center; justify-content: center;">
+            <div style="padding: 10; height: 100%; width: 500; display: inline; margin-top: 10;">
+    
+                <div style="height: fit-content; width: fit-content; margin: auto; ">
+                    <h1 style="font-size: 18;">Player 1</h1>
+                </div>
+                <input disabled class="mainInput1" onkeyup="attInput()" type="text" style="font-size: medium; margin-top: 0; background-color: #E6E6FA ; height: 200; width: 100%; padding: 20; border-top-right-radius: 12px; border-top-left-radius: 12px;"></input>
+                <button onclick="newLog1()" style="background-color: #B0C4DE ; width: 100%; margin-top: 0; border-bottom-left-radius: 12px;  border-bottom-right-radius: 12px;  border: blue;"> JOIN</button>
             </div>
-            <input disabled class="mainInput1" onkeyup="attInput()" type="text" style="font-size: medium; margin-top: 0; background-color: #E6E6FA ; height: 200; width: 100%; padding: 20; border-top-right-radius: 12px; border-top-left-radius: 12px;"></input>
-            <button onclick="newLog1()" style="background-color: #B0C4DE ; width: 100%; margin-top: 0; border-bottom-left-radius: 12px;  border-bottom-right-radius: 12px;  border: blue;"> JOIN</button>
+            
+            <div style="padding: 10; height: 100%; width: 500; display: inline; margin-top: 10;">
+        
+                <div style="height: fit-content; width: fit-content; margin: auto; ">
+                    <h1 style="font-size: 18;">Player 2</h1>
+                </div>
+                <input disabled class="mainInput2" onkeyup="attInput()" type="text" style="font-size: medium; margin-top: 0; background-color: #E6E6FA ; height: 200; width: 100%; padding: 20; border-top-right-radius: 12px; border-top-left-radius: 12px;"></input>
+                <button onclick="newLog2()" style="background-color: #B0C4DE ; border-color: aqua; width: 100%; margin-top: 0; border-bottom-left-radius: 12px;  border-bottom-right-radius: 12px;  border: blue;"> JOIN</button>
+            </div>
+    
+            
+        </div>
+        <div style="display:grid; align-items: center; justify-content: center;">
+            <button onclick="getNewWord()" style="margin-top: 10;" > getNewWord()</button>
+            <button onclick="sendTry()" style="margin-top: 10;" > sendTry()</button>
+            <button onclick="newSong()" style="margin-top: 10;" >newSong()</button>
         </div>
         
-        <div style="padding: 10; height: 100%; width: 500; display: inline; margin-top: 10;">
-    
-            <div style="height: fit-content; width: fit-content; margin: auto; ">
-                <h1 style="font-size: 18;">Player 2</h1>
-            </div>
-            <input disabled class="mainInput2" onkeyup="attInput()" type="text" style="font-size: medium; margin-top: 0; background-color: #E6E6FA ; height: 200; width: 100%; padding: 20; border-top-right-radius: 12px; border-top-left-radius: 12px;"></input>
-            <button onclick="newLog2()" style="background-color: #B0C4DE ; border-color: aqua; width: 100%; margin-top: 0; border-bottom-left-radius: 12px;  border-bottom-right-radius: 12px;  border: blue;"> JOIN</button>
-        </div>
-
-        
     </div>
-    <div style="display:grid; align-items: center; justify-content: center;">
-        <button onclick="getNewWord()" style="margin-top: 10;" > getNewWord()</button>
-        <button onclick="sendTry()" style="margin-top: 10;" > sendTry()</button>
-        <button onclick="newSong()" style="margin-top: 10;" >newSong()</button>
-    </div>
-    
+   
     <div style="display:grid; align-items: center; justify-content: center;" class="videoMusic">
         <iframe  style="display: flex; margin: auto; margin-top: 30;"  width="720" height="480" src="https://www.youtube.com/embed/LOZuxwVk7TU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
