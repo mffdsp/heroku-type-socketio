@@ -1,0 +1,47 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js"></script>
+    <title>Document</title>
+</head>
+<body class="body">
+
+    <div style="padding: 10; height: 100%; width: 500; display: inline; margin-top: 100;">
+
+        <div style="height: fit-content; width: fit-content; margin: auto; background-color: wheat; ">
+            <h1 style="font-size: 18;">Player 1</h1>
+        </div>
+        <input class="mainInput" onkeypress="attInput()" type="text" style="font-size: medium; margin-top: 0; background-color: wheat; height: 200; width: 100%; padding: 20; border-top-right-radius: 12px; border-top-left-radius: 12px;"></input>
+        <button onclick="newLog()" style="background-color: whitesmoke; width: 100%; margin-top: 0; border-bottom-left-radius: 12px;  border-bottom-right-radius: 12px;  border: blue;"> SEND</button>
+    </div>
+
+    <script type="text/javascript"> 
+
+        var socket = io('http://localhost:3000/');
+
+        socket.on('newLoginAll', function(socket){
+            $('.body').append('<h1>'+ socket.obj + '</h1>')
+        });
+   
+        function newLog(){
+            console.log("NOVO LOGIN");
+            $('.body').append('<h1>'+ socket.id + '</h1>')
+            socket.emit('newLogin', {autor: 'joao'});
+        };
+
+    
+        function attInput(msg){
+            socket.emit('newText', $('.mainInput').val());
+
+        }
+
+        socket.on('newTextRes', function(data){
+            $('.mainInput').val(data);
+        });
+
+
+    </script>
+</body>
+</html>
