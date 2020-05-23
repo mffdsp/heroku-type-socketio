@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+var Request = require("request");
 
 const app = express();
 const server = require('http').createServer(app);
@@ -15,13 +16,13 @@ app.use('/', (req, res) => {
 })
 
 let users = []
-
+let word;
 io.on('connection', socket => {
     
     console.log(socket.id)
 
     socket.emit('getData', users);
-
+    
     socket.on('newLogin', data => {
         users.push(data);
         console.log(data.autor);
@@ -32,7 +33,30 @@ io.on('connection', socket => {
         console.log(data);
         socket.broadcast.emit('newTextRes', data);
     }); 
- 
+
+    socket.on('getWord', data => {
+        Request.get("https://random-word-api.herokuapp.com/word?number=5", (error, res, body) => {
+            if(error) {
+             return console.dir(error);
+             }
+             word = JSON.parse(body);
+             console.log(word);
+             socket.emit('returnWord', word);
+             socket.broadcast.emit('returnWord', word);
+        });
+    });
+
+    socket.on('sendTry', data => {
+       let result = data.ans == (data.try).toLowerCase();
+       console.log(data);
+       socket.emit('returnTry', result);
+       socket.broadcast.emit('returnTry', result);
+    });
+    
+    socket.on('sendSong', data =>{
+        socket.emit('returnSong', data);
+        socket.broadcast.emit('returnSong', data);
+    })
 });
 
 server.listen(porta);
