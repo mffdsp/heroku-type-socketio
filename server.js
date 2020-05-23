@@ -30,5 +30,5 @@ io.on('connection', socket => {
 });
 
 server.listen(porta, () => {
-    console.log(`Server running at http://${hostname}:${port}/`);
+    //console.log(`Server running at http://${hostname}:${port}/`);
 });
