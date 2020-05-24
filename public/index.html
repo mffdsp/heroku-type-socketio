@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js"></script>
-    <title>Document</title>
+    <title>Tomzinho</title>
 </head>
 <body style="overflow-y: auto; display: flexbox  ;align-items: center; justify-content: center;"  class="body" >
     <div style="background-color: whitesmoke; margin:auto; width: fit-content; display:grid ;align-items: center; justify-content: center;">
@@ -61,7 +61,7 @@
         }
         socket.on('returnSong', function(data){
             $(".videoMusic iframe").remove();
-            $('<iframe style="display: flex; margin: auto; margin-top: 30;"  width="720" height="480" allowfullscreen></iframe>')
+            $('<iframe  style="display: flex; margin: auto; margin-top: 30;"  width="720" height="480" src="https://www.youtube.com/embed/LOZuxwVk7TU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>')
                 .attr("src", "http://www.youtube.com/embed/" + data)
                 .appendTo(".videoMusic");
            
