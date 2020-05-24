@@ -14,7 +14,7 @@
             <div style="padding: 10; height: 100%; width: 500; display: inline; margin-top: 10;">
     
                 <div style="height: fit-content; width: fit-content; margin: auto; ">
-                    <h1 style="font-size: 18;">Player 1</h1>
+                    <h1 class="p1" style="font-size: 18;">Player 1</h1>
                 </div>
                 <input disabled class="mainInput1" onkeyup="attInput()" type="text" style="font-size: medium; margin-top: 0; background-color: #E6E6FA ; height: 200; width: 100%; padding: 20; border-top-right-radius: 12px; border-top-left-radius: 12px;"></input>
                 <button onclick="newLog1()" style="background-color: #B0C4DE ; width: 100%; margin-top: 0; border-bottom-left-radius: 12px;  border-bottom-right-radius: 12px;  border: blue;"> JOIN</button>
@@ -23,7 +23,7 @@
             <div style="padding: 10; height: 100%; width: 500; display: inline; margin-top: 10;">
         
                 <div style="height: fit-content; width: fit-content; margin: auto; ">
-                    <h1 style="font-size: 18;">Player 2</h1>
+                    <h1 class="p2" style="font-size: 18;">Player 2</h1>
                 </div>
                 <input disabled class="mainInput2" onkeyup="attInput()" type="text" style="font-size: medium; margin-top: 0; background-color: #E6E6FA ; height: 200; width: 100%; padding: 20; border-top-right-radius: 12px; border-top-left-radius: 12px;"></input>
                 <button onclick="newLog2()" style="background-color: #B0C4DE ; border-color: aqua; width: 100%; margin-top: 0; border-bottom-left-radius: 12px;  border-bottom-right-radius: 12px;  border: blue;"> JOIN</button>
@@ -70,16 +70,34 @@
         function sendTry(){
             var value; 
             if(player == 1){
-                value = $('.mainInput1').val();
-            }else {
-                value = $('.mainInput2').val();
-            }
+                value = $('.mainInput1').val() == newString;
+                if(value){
+                    $('.p1').css("background-color","green");
+                }else $('.p1').css("background-color","red");
 
-            socket.emit('sendTry', {try:value, ans:newString});
+                socket.emit('sendTry', value);
+            }else {
+                value = $('.mainInput2').val() == newString;
+                if(value){
+                    $('.p2').css("background-color","green");
+                }else $('.p2').css("background-color","red");
+                socket.emit('sendTry', value);
+            }
          }
 
          socket.on('returnTry', function(data) {
-            $('.body').append('<h1 style="display: flex; margin: auto; margin-top:90">'+ "Player: " + player + " // acertou = " + data + '</h1>')
+
+            if(player == 1){
+                if(data){
+                    $('.p2').css("background-color","green");
+                }else $('.p2').css("background-color","red");
+
+            }else {
+                if(data){
+                    $('.p1').css("background-color","green");
+                }else $('.p1').css("background-color","red");
+
+            }
          });
 
        function getNewWord(){

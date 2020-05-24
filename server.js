@@ -35,7 +35,7 @@ io.on('connection', socket => {
     }); 
 
     socket.on('getWord', data => {
-        Request.get("https://random-word-api.herokuapp.com/word?number=5", (error, res, body) => {
+        Request.get("https://random-word-api.herokuapp.com/word?number=3", (error, res, body) => {
             if(error) {
              return console.dir(error);
              }
@@ -47,10 +47,8 @@ io.on('connection', socket => {
     });
 
     socket.on('sendTry', data => {
-       let result = data.ans == (data.try).toLowerCase();
        console.log(data);
-       socket.emit('returnTry', result);
-       socket.broadcast.emit('returnTry', result);
+       socket.broadcast.emit('returnTry', data);
     });
     
     socket.on('sendSong', data =>{
