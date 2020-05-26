@@ -17,12 +17,12 @@ app.use('/', (req, res) => {
 
 let users = []
 let word;
+
 io.on('connection', socket => {
     
     console.log(socket.id)
 
-    socket.emit('getData', users);
-    
+   
     socket.on('newLogin', data => {
         users.push(data);
         console.log(data.autor);
@@ -45,7 +45,9 @@ io.on('connection', socket => {
              socket.broadcast.emit('returnWord', word);
         });
     });
-
+    
+    socket.emit('getData', word);
+    
     socket.on('sendTry', data => {
        console.log(data);
        socket.broadcast.emit('returnTry', data);

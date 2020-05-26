@@ -9,7 +9,7 @@
 </head>
 <body style="overflow-y: auto; display: flexbox  ;align-items: center; justify-content: center;"  class="body" >
     <div style="background-color: whitesmoke; margin:auto; width: fit-content; display:grid ;align-items: center; justify-content: center;">
-        <h1 oncopy="return false" oncut="return false" onpaste="return false" class="mainWord" style="text-align: center; font-size: 16; margin: auto; display: flex; margin-top: 10; width: fit-content;" >nullWord</h1>
+        <h1 class="mainWord" style="text-align: center; font-size: 16; margin: auto; display: flex; margin-top: 10; width: fit-content;" >nullWord</h1>
 
         <div style="display:flex ;align-items: center; justify-content: center;">
             <div style="padding: 10; height: 100%; width: 500; display: inline; margin-top: 10;">
@@ -110,13 +110,18 @@
                 newString += " " + datas;
            }
             $('.mainWord').text(newString);
+            $('.mainWord').attr('onmousedown', 'return false;');
        })
         socket.on('getData', function(data){
-            
-            //if(data.length == 2){
-           //     player = 2;
-            //}
-           // console.log(data.length + 'player: ' + player);
+            if(data == null){
+                console.log("nothing")
+                return;
+            }
+           newString = "teus";
+           for(datas of data){
+                newString += " " + datas;
+           }
+            $('.mainWord').text(newString);
         });
         socket.on('newLoginAll', function(socket){
             $('.body').append('<h1>'+ socket.obj + '</h1>')
